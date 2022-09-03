@@ -10,21 +10,11 @@ package br.com.stefanini.developerup.dto;
 //API PARA O CLIENTE
 public class ClienteDto {
 
-
-    private Long id;
     private String email;
 
     private String nome;
 
     private String contato;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;

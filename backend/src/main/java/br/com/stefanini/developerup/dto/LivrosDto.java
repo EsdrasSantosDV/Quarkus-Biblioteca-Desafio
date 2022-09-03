@@ -18,7 +18,7 @@ public class LivrosDto {
 	}
 
 	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+		this.ISBN = iSBN;
 	}
 
 	public String getNome() {

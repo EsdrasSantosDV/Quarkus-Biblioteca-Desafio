@@ -4,7 +4,6 @@ package br.com.stefanini.developerup.service;
 
 import br.com.stefanini.developerup.dao.ClienteDao;
 import br.com.stefanini.developerup.dto.ClienteDto;
-import br.com.stefanini.developerup.dto.ClienteForm;
 import br.com.stefanini.developerup.model.Cliente;
 import br.com.stefanini.developerup.parser.ClienteParser;
 import org.eclipse.microprofile.opentracing.Traced;
@@ -13,6 +12,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import javax.xml.bind.PropertyException;
@@ -37,7 +37,7 @@ public class ClienteService {
     }
 
 
-    private void validar(ClienteForm dto) throws  Exception
+    public void validar(@Valid ClienteDto dto) throws  Exception
     {
         if(dto==null)
         {
@@ -47,7 +47,7 @@ public class ClienteService {
 
         validaEmailDuplicado(dto.getEmail());
 
-        if(dto.getEmail()==null||!dto.getEmail().contains("@"))
+        if(dto.getEmail()==null||!dto.getEmail().contains("@")||!dto.getEmail().contains("."))
         {
             throw new PropertyException("Email Invalido",dto.getEmail());
         }
@@ -64,7 +64,7 @@ public class ClienteService {
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public void cadastrar(@Valid ClienteForm clientedto) throws Exception {
+    public void cadastrar(@Valid  ClienteDto clientedto) throws Exception {
 
         //validar
         validar(clientedto);
@@ -92,6 +92,9 @@ public class ClienteService {
     {
         return ClienteParser.get().dto(buscarPorEmail(email));
     }
+
+
+
     @Transactional(rollbackOn = Exception.class)
     public void atualizar(String email, ClienteDto dto) {
         Cliente cliente=ClienteParser.get().entidade(dto);

@@ -2,16 +2,12 @@ package br.com.stefanini.developerup.model;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -23,11 +19,20 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
 @Table(name="tb_autor")
+@NamedNativeQueries(value={
+		@NamedNativeQuery(name="CONSULTAR_AUTORES",query="SELECT ISNI,nome,email,data_nascimento,biografia FROM tb_autor",resultClass = Autor.class),
+		@NamedNativeQuery(name="INSERIR_AUTOR",query="INSERT INTO tb_autor(ISNI,nome,email,data_nascimento,biografia) VALUES (:ISNI,:nome,:email,:data_nascimento,:biografia)"),
+		@NamedNativeQuery(name="EXCLUIR_AUTOR_BYISNI",query="DELETE FROM tb_autor WHERE ISNI=:ISNI"),
+		@NamedNativeQuery(name="ATUALIZAR_AUTOR_BYISNI",query="UPDATE tb_autor set nome=:nome,email=:email,biografia=:biografia WHERE ISNI=:ISNI"),
+		@NamedNativeQuery(name="CONSULTAR_AUTOR_BYISNI",query="SELECT ISNI,nome,email,data_nascimento,biografia FROM tb_autor WHERE ISNI=:ISNI",resultClass = Autor.class),
+		@NamedNativeQuery(name="ISNI_SENDO_USADO",query="SELECT ISNI,nome,email,data_nascimento,biografia FROM tb_autor WHERE ISNI=:ISNI",resultClass = Autor.class)
+})
 public class Autor implements Serializable {
 	
 	
 	@Id
 	@NotBlank(message="O campo ISNI é obrigatório!")
+	@Column(name = "ISNI" ,unique=true)
 	private String ISNI;
 	
 	@NotBlank(message="O campo nome é obrigatório!")
@@ -42,7 +47,7 @@ public class Autor implements Serializable {
 	
 	@NotBlank(message="O campo data de nasciemento é obrigatório!")
 	@Column(name = "data_nascimento",nullable = false,updatable = false)
-	private LocalDateTime dataNascimento;
+	private LocalDate dataNascimento;
 	
 	@NotBlank(message="O campo biografia é obrigatório!")
 	@Size(max = 200, message = "A biografia deve possuir no maximo 200 caracteres")
@@ -53,12 +58,12 @@ public class Autor implements Serializable {
 	@JsonIgnoreProperties("autor")
 	private List<Livros> livros;
 	
-	SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+
 	
 	public Autor() {
 	}
 
-	public Autor( String nome, String ISNI, String email,LocalDateTime dataNascimento, String biografia){
+	public Autor( String nome, String ISNI, String email,LocalDate dataNascimento, String biografia){
 
 		this.nome = nome;
 		this.ISNI = ISNI;
@@ -91,21 +96,14 @@ public class Autor implements Serializable {
 		this.email = email;
 	}
 
-	public LocalDateTime getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDateTime dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public SimpleDateFormat getFmt() {
-		return fmt;
-	}
-
-	public void setFmt(SimpleDateFormat fmt) {
-		this.fmt = fmt;
-	}
 
 	public String getBiografia() {
 		return biografia;

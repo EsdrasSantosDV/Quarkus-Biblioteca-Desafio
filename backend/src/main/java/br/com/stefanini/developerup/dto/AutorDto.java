@@ -1,5 +1,6 @@
 package br.com.stefanini.developerup.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -11,7 +12,7 @@ public class AutorDto {
 		
 	private String email;
 	
-	private LocalDateTime dataNascimento;
+	private LocalDate dataNascimento;
 	
 	private String biografia;
 
@@ -19,8 +20,8 @@ public class AutorDto {
 		return ISNI;
 	}
 
-	public void setISNI(String iSNI) {
-		ISNI = iSNI;
+	public void setISNI(String ISNI) {
+		ISNI = ISNI;
 	}
 
 	public String getNome() {
@@ -39,11 +40,11 @@ public class AutorDto {
 		this.email = email;
 	}
 
-	public LocalDateTime getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDateTime dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

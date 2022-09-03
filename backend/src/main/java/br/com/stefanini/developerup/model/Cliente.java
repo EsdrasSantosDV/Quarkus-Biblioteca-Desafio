@@ -22,20 +22,16 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 @Entity
 @Table(name = "cliente")
 @NamedNativeQueries(value={
-        @NamedNativeQuery(name="CONSULTAR_CLIENTES",query="SELECT id,email,nome,contato FROM cliente",resultClass = Cliente.class),
+        @NamedNativeQuery(name="CONSULTAR_CLIENTES",query="SELECT email,nome,contato FROM cliente",resultClass = Cliente.class),
         @NamedNativeQuery(name="INSERIR_CLIENTE",query="INSERT INTO cliente(email,nome,contato) VALUES (:email,:nome,:contato)"),
         @NamedNativeQuery(name="EXCLUIR_CLIENTE_BYEMAIL",query="DELETE FROM cliente WHERE email=:email"),
         @NamedNativeQuery(name="ATUALIZAR_CLIENTE_BYEMAIL",query="UPDATE cliente set nome=:nome,contato=:contato WHERE email=:email"),
-        @NamedNativeQuery(name="CONSULTAR_CLIENTE_BYEMAIL",query="SELECT id,nome,contato,email FROM cliente WHERE email=:email",resultClass = Cliente.class),
-        @NamedNativeQuery(name="EMAIL_SENDO_USADO",query="SELECT id,nome,contato,email FROM cliente WHERE email=:email",resultClass = Cliente.class)
+        @NamedNativeQuery(name="CONSULTAR_CLIENTE_BYEMAIL",query="SELECT nome,contato,email FROM cliente WHERE email=:email",resultClass = Cliente.class),
+        @NamedNativeQuery(name="EMAIL_SENDO_USADO",query="SELECT nome,contato,email FROM cliente WHERE email=:email",resultClass = Cliente.class)
 })
 
 public class Cliente  implements Serializable {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private Long id;
-
-
     @Schema(example = "email@email.com")
     @NotBlank(message="O campo e-mail é obrigatório!")
     @Email(message="O email deve ser Valido")
@@ -55,13 +51,7 @@ public class Cliente  implements Serializable {
     @OneToMany
     private List<Emprestimo> emprestimos;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
     public String getEmail() {
         return email;
     }

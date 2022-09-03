@@ -16,9 +16,10 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="livros")
-public class Livros implements Serializable {
+public class Livros  extends PanacheEntityBase implements Serializable {
 
 	@Id
+	@Column(name = "ISBN")
 	private String ISBN;
 
 	@NotBlank(message="O campo nome é obrigatório!")
@@ -34,7 +35,7 @@ public class Livros implements Serializable {
 	@Size(max = 50, message = "A editora deve conter no maximo 50 caracteres")
 	private String editora;
 
-	@NotBlank(message="O campo quantidade de exemplares é obrigatório!")
+
 	@Column(name = "quantidade_exemplares")
 	private Integer quatidadeExemplares;
 

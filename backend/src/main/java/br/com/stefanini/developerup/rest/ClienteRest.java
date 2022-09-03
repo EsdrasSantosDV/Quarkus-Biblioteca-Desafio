@@ -9,7 +9,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.stefanini.developerup.dto.ClienteDto;
-import br.com.stefanini.developerup.dto.ClienteForm;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -50,12 +49,12 @@ public class ClienteRest {
     
     @POST
     @Operation(summary = "Cadastar", description = "Cadastar um Cliente")
-    @APIResponse(responseCode = "201", description = "ClienteForm",
+    @APIResponse(responseCode = "201", description = "ClienteDto",
             content = {@Content(mediaType = "application/json",
-                    schema = @Schema(implementation = ClienteForm.class))})
-    public Response cadastrar(ClienteForm cliente) throws Exception {
-        System.out.println(cliente.getEmail());
-        Set<ConstraintViolation<ClienteForm>> erros=validator.validate(cliente);
+                    schema = @Schema(implementation = ClienteDto.class))})
+    public Response cadastrar(ClienteDto cliente) throws Exception {
+
+        Set<ConstraintViolation<ClienteDto>> erros=validator.validate(cliente);
         if(erros.isEmpty())
         {
             service.cadastrar(cliente);
@@ -124,7 +123,7 @@ public class ClienteRest {
             description = "excluir cliente",
             content ={
                     @Content(mediaType="application/json",
-                            schema = @Schema(implementation = ClienteForm.class))
+                            schema = @Schema(implementation = ClienteDto.class))
             })
     public Response excluir(@PathParam("email") String email){
         service.excluir(email);
