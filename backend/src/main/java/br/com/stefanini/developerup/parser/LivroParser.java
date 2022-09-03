@@ -9,6 +9,14 @@ public class LivroParser {
         return  new LivroParser();
     }
 
+    public Livros entidade(LivrosDto dto)
+    {
+        Livros entidade=new Livros();
+        entidade.setNome(dto.getNome());
+        entidade.setISBN(dto.getISBN());
+        return entidade;
+    }
+
     public LivrosDto dto(Livros entidade){
         LivrosDto dto = new LivrosDto();
 

@@ -1,5 +1,6 @@
 package br.com.stefanini.developerup.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -21,7 +22,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
  */
 @Entity
 @Table(name = "cliente")
-public class Cliente extends PanacheEntityBase {
+public class Cliente implements Serializable {
 
     @Id
     @Schema(example = "email@email.com")

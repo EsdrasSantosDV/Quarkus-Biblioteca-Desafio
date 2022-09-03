@@ -9,6 +9,14 @@ public class AutorParser {
         return  new AutorParser();
     }
 
+    public Autor entidade(AutorDto dto)
+    {
+        Autor entidade=new Autor();
+        entidade.setNome(dto.getNome());
+        entidade.setEmail(dto.getEmail());
+        return entidade;
+    }
+
     public AutorDto dto(Autor entidade){
         AutorDto dto = new AutorDto();
 

@@ -14,8 +14,8 @@ import java.util.List;
  */
 @RequestScoped
 public class ClienteDao {
-    public List<Cliente> listar(){
-        return Cliente.listAll(Sort.by("nome,email,contato").ascending());
-    }
+//    public List<Cliente> listar(){
+//        return Cliente.listAll(Sort.by("nome,email,contato").ascending());
+//    }
 
 }

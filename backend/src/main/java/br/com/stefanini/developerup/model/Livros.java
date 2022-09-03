@@ -12,9 +12,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name="livros")
-public class Livros extends PanacheEntityBase{
+public class Livros implements Serializable {
 
 	@Id
 	private String ISBN;

@@ -1,5 +1,6 @@
 package br.com.stefanini.developerup.dto;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class AutorDto {
@@ -10,7 +11,7 @@ public class AutorDto {
 		
 	private String email;
 	
-	private Date dataNascimento;
+	private LocalDateTime dataNascimento;
 	
 	private String biografia;
 
@@ -38,11 +39,11 @@ public class AutorDto {
 		this.email = email;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDateTime getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDateTime dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

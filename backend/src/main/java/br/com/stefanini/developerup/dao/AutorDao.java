@@ -9,9 +9,9 @@ import io.quarkus.panache.common.Sort;
 
 	@RequestScoped
 	public class AutorDao {
-	    public List<Autor> listar(){
-	        return Autor.listAll(Sort.by("nome, email, dataNascimento, biografia").ascending());
-	    }
+//	    public List<Autor> listar(){
+//	        return Autor;
+//	    }
 
 	}
 

@@ -10,8 +10,8 @@ import io.quarkus.panache.common.Sort;
 @RequestScoped
 public class LivrosDao {
 	
-	public List<Livros> listar(){
-        return Livros.listAll(Sort.by("ISBN,nome,anoDePublicacao,editora, quantidadeExemplares").ascending());
-    }
+//	public List<Livros> listar(){
+//        return Livros.listAll(Sort.by("ISBN,nome,anoDePublicacao,editora, quantidadeExemplares").ascending());
+//    }
 
 }

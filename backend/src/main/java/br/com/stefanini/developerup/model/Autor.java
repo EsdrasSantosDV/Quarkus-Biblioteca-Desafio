@@ -1,6 +1,9 @@
 package br.com.stefanini.developerup.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,7 +23,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
 @Table(name="tb_autor")
-public class Autor extends PanacheEntityBase {
+public class Autor implements Serializable {
 	
 	
 	@Id
@@ -38,8 +41,8 @@ public class Autor extends PanacheEntityBase {
 	private String email;
 	
 	@NotBlank(message="O campo data de nasciemento é obrigatório!")
-	@Column(name = "data_nascimento")
-	private String dataNascimento;
+	@Column(name = "data_nascimento",nullable = false,updatable = false)
+	private LocalDateTime dataNascimento;
 	
 	@NotBlank(message="O campo biografia é obrigatório!")
 	@Size(max = 200, message = "A biografia deve possuir no maximo 200 caracteres")
@@ -55,8 +58,8 @@ public class Autor extends PanacheEntityBase {
 	public Autor() {
 	}
 
-	public Autor( String nome, String ISNI, String email, String dataNascimento, String biografia){
-	
+	public Autor( String nome, String ISNI, String email,LocalDateTime dataNascimento, String biografia){
+
 		this.nome = nome;
 		this.ISNI = ISNI;
 		this.email = email;
@@ -88,12 +91,20 @@ public class Autor extends PanacheEntityBase {
 		this.email = email;
 	}
 
-	public String getDataNascimento() {
+	public LocalDateTime getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(LocalDateTime dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public SimpleDateFormat getFmt() {
+		return fmt;
+	}
+
+	public void setFmt(SimpleDateFormat fmt) {
+		this.fmt = fmt;
 	}
 
 	public String getBiografia() {

@@ -14,6 +14,16 @@ public class ClienteParser {
         return  new ClienteParser();
     }
 
+
+    public Cliente entidade(ClienteDto dto)
+    {
+        Cliente entidade=new Cliente();
+        entidade.setEmail(dto.getEmail());
+        entidade.setNome(dto.getNome());
+        entidade.setContato(dto.getContato());
+        return entidade;
+    }
+
     public ClienteDto dto(Cliente entidade){
         ClienteDto dto = new ClienteDto();
 

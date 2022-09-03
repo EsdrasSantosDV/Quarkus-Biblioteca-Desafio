@@ -1,5 +1,6 @@
 package br.com.stefanini.developerup.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
 @Table(name="tb_emprestimo")
-public class Emprestimo extends PanacheEntityBase {
+public class Emprestimo implements Serializable {
 
 	@Id
 	private Long id;
