@@ -6,12 +6,12 @@ import javax.enterprise.context.RequestScoped;
 
 import br.com.stefanini.developerup.model.Autor;
 import io.quarkus.panache.common.Sort;
+import org.eclipse.microprofile.opentracing.Traced;
 
-	@RequestScoped
-	public class AutorDao {
-//	    public List<Autor> listar(){
-//	        return Autor;
-//	    }
+@RequestScoped
+@Traced
+public class AutorDao {
 
-	}
+
+}
 

@@ -25,42 +25,7 @@ import br.com.stefanini.developerup.service.LivrosService;
 @Path("/livros")
 @RequestScoped
 public class LivrosRest {
-		@Inject
-	    LivrosService service;
+	@Inject
+	LivrosService service;
 
-	    @GET
-	    @Operation(summary = "Listar", description = "Retorna uma lista de livros")
-	    @APIResponse(responseCode = "200", description = "LivrosDto",
-	            content = {@Content(mediaType = "application/json",
-	                    schema = @Schema(implementation = LivrosDto.class))})
-	    public Response listar()  {
-	        return Response.status(Response.Status.OK).entity(service.listar()).build();
-	    }
-	    
-	    @POST
-	    @Operation(summary = "Cadastar", description = "Cadastar um livro")
-	    @APIResponse(responseCode = "200", description = "LivrosDto",
-	            content = {@Content(mediaType = "application/json",
-	                    schema = @Schema(implementation = LivrosDto.class))})
-	    public Response cadastrar()  {
-	        return Response.status(Response.Status.OK).entity(service.cadastrar()).build();
-	    }
-	    
-	    @PUT
-	    @Operation(summary = "Atualizar", description = "Atualizar um livro")
-	    @APIResponse(responseCode = "200", description = "LivrosDto",
-	            content = {@Content(mediaType = "application/json",
-	                    schema = @Schema(implementation = LivrosDto.class))})
-	    public Response editar()  {
-	        return Response.status(Response.Status.OK).entity(service.editar()).build();
-	    }
-	    
-	    @DELETE
-	    @Operation(summary = "Deletar", description = "Deletar um livro")
-	    @APIResponse(responseCode = "200", description = "LivrosDto",
-	            content = {@Content(mediaType = "application/json",
-	                    schema = @Schema(implementation = LivrosDto.class))})
-	    public Response deletar()  {
-	        return Response.status(Response.Status.OK).entity(service.deletar()).build();
-	    }
-	    }
+}
