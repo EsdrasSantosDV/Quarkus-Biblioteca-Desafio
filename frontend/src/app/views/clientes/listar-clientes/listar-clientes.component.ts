@@ -27,13 +27,20 @@ export class ListarClientesComponent implements OnInit {
       this.clientes = res;
     });
   }
+
   converterContato(contato: string) {
     return(`(${contato[0]}${contato[1]}) ${contato[2]}${contato[3]}${contato[4]} - ${contato[0]}${contato[5]}${contato[6]} - ${contato[7]}${contato[8]}${contato[9]}`)
   }
 
-  async deleteCliente() {
-    console.log('deletar');
-    this.buscarClientes();
+  async deleteCliente(email:string) {
+    console.log('deletar',email);
+    this.clienteApi.deleteCliente(email).subscribe((res) => {
+
+      this.buscarClientes();
+
+    });
+
+
   }
 
 

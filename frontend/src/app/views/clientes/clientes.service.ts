@@ -19,8 +19,8 @@ export class ClienteService {
 
   buscarCliente(email: String): Observable<Cliente[]> {
     return this.http
-      .get<Cliente[]>(ApiUrl.listarClientes + '/' + email)
-      .pipe(map((res) => res.map((c, i) => ({ ...c, posicao: i }))));
+      .get<Cliente[]>(ApiUrl.listarClientes + '/' + email);
+
   }
 
   addCliente(newCliente: Cliente): Observable<Cliente[]> {
@@ -33,8 +33,12 @@ export class ClienteService {
       .put<Cliente[]>(ApiUrl.listarClientes, updateCliente);
   }
 
-  deleteCliente(deleteCliente: Cliente): Observable<Cliente[]> {
+  deleteCliente(email:string) {
+
+    //console.log(ApiUrl.listarClientes + '/' + email);
     return this.http
-      .delete<Cliente[]>(ApiUrl.listarClientes + '/' + deleteCliente);
+      .delete(ApiUrl.listarClientes + '/' + email);
   }
+
+
 }

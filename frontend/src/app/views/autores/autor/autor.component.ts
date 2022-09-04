@@ -59,13 +59,13 @@ export class AutorComponent implements OnInit {
 
           this.autorApi.updateAutor(object).subscribe((res) => {
             if (res) {
-              // this.toastr.success('Autor Atualizado com Sucesso', 'Adicionado!');
+
               alert('Autor Atualizado com Sucesso!');
               this.router.navigateByUrl('/autores/listar');
             }
           }, (err) => {
             console.log(err)
-            // this.toastr.error('Houve um erro ao editar o Autor!', 'Erro ao Editar!');
+
             alert('Houve um erro ao editar o Autor!');
           });
         }
@@ -80,13 +80,13 @@ export class AutorComponent implements OnInit {
 
           this.autorApi.addAutor(object).subscribe((res) => {
             if (res) {
-              // this.toastr.success('Autor Adicionado com Sucesso!', 'Adicionado!');
+
               alert('Autor Adicionado com Sucesso!');
               this.router.navigateByUrl('/autores/listar');
             }
           }, (err) => {
             console.log(err)
-            // this.toastr.error('Houve um erro ao adicionar o Autor!', 'Erro ao Adicionar!');
+
             alert('Houve um erro ao adicionar o Autor!');
           });
 

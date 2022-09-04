@@ -18,7 +18,7 @@
     <div class="col-md-4">
       <div class="card-body">
         <label for="email">Email</label>
-        <input class="form-control" id="email" formControlName="email" />
+        <input class="form-control" id="email" formControlName="email"/>
       </div>
     </div>
     <div class="col-md-5">
@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <div class="row" style="padding-top: 2em;">
+  <div class="row" style="padding-top: 5em; padding-left: 12em;">
     <div class="col-md-4 text-left">
       <div class="card-body">
         <button class="btn btn-danger" [routerLink]="['/clientes/listar']">
@@ -43,7 +43,7 @@
         </button>
       </div>
     </div>
-    <div class="col-md-4 text-right">
+    <div class="col-md-6 text-center">
       <div class="card-body">
         <button class="btn btn-success text-right" type="submit" [disabled]="!clienteForm.valid">
           {{editar ? "Salvar" : "Adicionar"}}

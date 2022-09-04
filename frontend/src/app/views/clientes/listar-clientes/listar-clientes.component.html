@@ -9,19 +9,17 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 
-  <!-- User name Definition -->
   <ng-container matColumnDef="nome">
     <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{row.nome}} </mat-cell>
   </ng-container>
 
-  <!-- Email Definition -->
+
   <ng-container matColumnDef="email">
-    <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+    <mat-header-cell *matHeaderCellDef > E-mail </mat-header-cell>
+    <mat-cell *matCellDef="let row" > {{row.email}} </mat-cell>
   </ng-container>
 
-  <!-- Contact Definition -->
   <ng-container matColumnDef="contato">
     <mat-header-cell *matHeaderCellDef> Contato </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{row.contato}} </mat-cell>
@@ -34,7 +32,7 @@
         [state]="{email:row.email}">
         Editar
       </button>
-      <button mat-raised-button color="warn" class="" (click)="deleteCliente()">
+      <button mat-raised-button color="warn" class="" (click)="deleteCliente(row.email)">
         Excluir
       </button>
     </mat-cell>

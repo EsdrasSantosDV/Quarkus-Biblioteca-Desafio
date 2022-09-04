@@ -30,24 +30,32 @@ export class ClienteComponent implements OnInit {
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'nome': new FormControl(null, [Validators.required, Validators.maxLength(50)]),
       'contato': new FormControl(null, [Validators.required]),
+
     });
+    if(this.editar)
+    {
+      this.clienteForm.controls['email'].disable();
+    }
     this.editar = (this.route.snapshot.paramMap.get('editar') == 'editar') ? true : false;
     this.email = this.router.getCurrentNavigation()?.extras.state?.email
   }
 
-  ngOnInit(): void {
+ ngOnInit() {
     if (this.email && this.editar) {
-      this.clienteApi.buscarCliente(this.email).subscribe((res) => {
-        this.cliente = res[0];
+     this.clienteApi.buscarCliente(this.email).subscribe((res:Cliente|any) => {
+      if (res) {
+        this.clienteForm.patchValue({
+          email: res.email,
+          nome: res.nome,
+          contato: res.contato,
+        });
+      }
+        console.log(res);
+        this.cliente = res;
       });
+      console.log(this.clienteForm.value);
     }
-    if (this.cliente) {
-      this.clienteForm.patchValue({
-        email: this.cliente.email,
-        nome: this.cliente.nome,
-        contato: this.cliente.contato,
-      });
-    }
+    console.log(this.editar);
 
   }
 
@@ -63,14 +71,11 @@ export class ClienteComponent implements OnInit {
         }
 
         this.clienteApi.updateCliente(object).subscribe((res) => {
-          if (res) {
-            // this.toastr.success('Cliente Atualizado com Sucesso', 'Adicionado!');
-            alert('Cliente Atualizado com Sucesso!');
-            this.router.navigateByUrl('/clientes/listar');
-          }
+          alert('Cliente Atualizado com Sucesso!');
+          this.router.navigateByUrl('/clientes/listar');
+
         }, (err) => {
           console.log(err)
-          // this.toastr.error('Houve um erro ao editar o Cliente!', 'Erro ao Editar!');
           alert('Houve um erro ao editar o Cliente!');
         });
 
@@ -83,14 +88,12 @@ export class ClienteComponent implements OnInit {
         }
 
         this.clienteApi.addCliente(object).subscribe((res) => {
-          if (res) {
-            // this.toastr.success('Cliente Adicionado com Sucesso', 'Adicionado!');
-            alert('Cliente Adicionado com Sucesso!');
-            this.router.navigateByUrl('/clientes/listar');
-          }
+          console.log(res);
+          alert('Cliente Adicionado com Sucesso!');
+          this.router.navigateByUrl('/clientes/listar');
+
         }, (err: any) => {
           console.log(err)
-          // this.toastr.error('Houve um erro ao adicionar o Cliente!', 'Erro ao Adicionar!');
           alert('Houve um erro ao adicionar o Cliente!');
         });
       }
