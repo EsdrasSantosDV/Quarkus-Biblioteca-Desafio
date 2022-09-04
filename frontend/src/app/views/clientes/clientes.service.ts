@@ -30,7 +30,7 @@ export class ClienteService {
 
   updateCliente(updateCliente: Cliente): Observable<Cliente[]> {
     return this.http
-      .put<Cliente[]>(ApiUrl.listarClientes, updateCliente);
+      .put<Cliente[]>(ApiUrl.listarClientes+'/'+updateCliente.email, updateCliente);
   }
 
   deleteCliente(email:string) {

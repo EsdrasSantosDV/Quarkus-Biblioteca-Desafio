@@ -32,10 +32,7 @@ export class ClienteComponent implements OnInit {
       'contato': new FormControl(null, [Validators.required]),
 
     });
-    if(this.editar)
-    {
-      this.clienteForm.controls['email'].disable();
-    }
+  
     this.editar = (this.route.snapshot.paramMap.get('editar') == 'editar') ? true : false;
     this.email = this.router.getCurrentNavigation()?.extras.state?.email
   }

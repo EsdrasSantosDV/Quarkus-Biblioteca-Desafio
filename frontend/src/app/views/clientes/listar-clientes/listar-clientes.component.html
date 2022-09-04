@@ -21,8 +21,8 @@
   </ng-container>
 
   <ng-container matColumnDef="contato">
-    <mat-header-cell *matHeaderCellDef> Contato </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.contato}} </mat-cell>
+    <mat-header-cell *matHeaderCellDef  > Contato </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.contato|phone}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="acoes">

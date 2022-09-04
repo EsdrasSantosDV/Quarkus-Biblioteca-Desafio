@@ -28,6 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ClienteComponent } from './views/clientes/cliente/cliente.component';
 
 import { NgxMaskModule } from 'ngx-mask'
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { NgxMaskModule } from 'ngx-mask'
     ListarLivrosComponent,
     LivroComponent,
     FooterComponent,
+
   ],
   imports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { NgxMaskModule } from 'ngx-mask'
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    SharedModule,
     NgbModule,
     NgbModalModule,
     ReactiveFormsModule,
