@@ -9,11 +9,32 @@ import ApiUrl from 'src/app/global/constant/api-urls.constant';
   providedIn: 'root',
 })
 export class ClienteService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   listarClientes(): Observable<Cliente[]> {
     return this.http
       .get<Cliente[]>(ApiUrl.listarClientes)
       .pipe(map((res) => res.map((c, i) => ({ ...c, posicao: i }))));
+  }
+
+  buscarCliente(email: String): Observable<Cliente[]> {
+    return this.http
+      .get<Cliente[]>(ApiUrl.listarClientes + '/' + email)
+      .pipe(map((res) => res.map((c, i) => ({ ...c, posicao: i }))));
+  }
+
+  addCliente(newCliente: Cliente): Observable<Cliente[]> {
+    return this.http
+      .post<Cliente[]>(ApiUrl.listarClientes, newCliente);
+  }
+
+  updateCliente(updateCliente: Cliente): Observable<Cliente[]> {
+    return this.http
+      .put<Cliente[]>(ApiUrl.listarClientes, updateCliente);
+  }
+
+  deleteCliente(deleteCliente: Cliente): Observable<Cliente[]> {
+    return this.http
+      .delete<Cliente[]>(ApiUrl.listarClientes + '/' + deleteCliente);
   }
 }

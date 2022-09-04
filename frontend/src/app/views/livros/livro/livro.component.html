@@ -1,0 +1,75 @@
+<div class="header" style="padding-bottom: 2em;">
+  <div class="row">
+    <div class="col-md-12" style="text-align: center; font-size: 2em;">
+      <span *ngIf="!editar">
+        Adicionar Livro
+      </span>
+      <span *ngIf="editar">
+        Editar Livro
+      </span>
+    </div>
+  </div>
+</div>
+
+<form *ngIf="livroForm" [formGroup]="livroForm" class="form-horizontal m-t-20" id="livroForm"
+  (ngSubmit)="onSubmit(livroForm.value)" novalidate>
+
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card-body">
+        <label for="nome">Nome</label>
+        <input class="form-control" id="nome" formControlName="nome" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-body">
+        <label for="autor">Autor</label>
+        <input class="form-control" id="autor" formControlName="autor" />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card-body">
+        <label for="anoPublicacao">Ano de Publicação</label>
+        <input class="form-control" type="number" id="anoPublicacao" formControlName="anoPublicacao" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card-body">
+        <label for="editora">Editora</label>
+        <input class="form-control" id="editora" formControlName="editora" />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card-body">
+        <label for="codISBN">ISBN</label>
+        <input class="form-control" id="codISBN" formControlName="codISBN" />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card-body">
+        <label for="qtdExemplares">Exemplares</label>
+        <input class="form-control" type="number" id="qtdExemplares" formControlName="qtdExemplares" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 2em;">
+    <div class="col-md-4 text-left">
+      <div class="card-body">
+        <button class="btn btn-danger" [routerLink]="['/livros/listar']">
+          Cancelar
+        </button>
+      </div>
+    </div>
+    <div class="col-md-4 text-right">
+      <div class="card-body">
+        <button class="btn btn-success text-right" type="submit" [disabled]="!livroForm.valid">
+          {{editar ? "Salvar" : "Adicionar"}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</form>

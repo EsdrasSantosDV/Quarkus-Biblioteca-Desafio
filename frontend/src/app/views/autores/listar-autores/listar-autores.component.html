@@ -1,0 +1,47 @@
+<div class="w-100 mb-3">
+  <button mat-raised-button color="primary" class="" [routerLink]="['/autores/autor/add']">
+    Novo
+  </button>
+</div>
+
+<mat-table [dataSource]="autores" class="mat-elevation-z8">
+  <!-- Header and Row Declarations -->
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+  <!-- Email Definition -->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+  </ng-container>
+
+  <!-- User name Definition -->
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.nome}} </mat-cell>
+  </ng-container>
+
+  <!-- Bigraphy Definition -->
+  <ng-container matColumnDef="biografia">
+    <mat-header-cell *matHeaderCellDef> Biografia </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.biografia}} </mat-cell>
+  </ng-container>
+
+  <!-- Born Definition -->
+  <ng-container matColumnDef="dataNascimento">
+    <mat-header-cell *matHeaderCellDef> Data de Nascimento </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.dataNascimento}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef style="width:180px"> Ações </mat-header-cell>
+    <mat-cell *matCellDef="let row" style="width:180px">
+      <button mat-raised-button color="accent" class="me-2" [routerLink]="['/autores/autor/editar']">
+        Editar
+      </button>
+      <button mat-raised-button color="warn" class="" (click)="deleteAutor()">
+        Excluir
+      </button>
+    </mat-cell>
+  </ng-container>
+</mat-table>

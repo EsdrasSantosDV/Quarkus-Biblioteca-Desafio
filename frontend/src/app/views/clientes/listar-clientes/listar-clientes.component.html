@@ -1,5 +1,5 @@
 <div class="w-100 mb-3">
-  <button mat-raised-button color="primary" class="">
+  <button mat-raised-button color="primary" class="" [routerLink]="['/clientes/cliente/add']">
     Novo
   </button>
 </div>
@@ -15,13 +15,13 @@
     <mat-cell *matCellDef="let row"> {{row.nome}} </mat-cell>
   </ng-container>
 
-  <!-- Age Definition -->
+  <!-- Email Definition -->
   <ng-container matColumnDef="email">
     <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
   </ng-container>
 
-  <!-- Title Definition -->
+  <!-- Contact Definition -->
   <ng-container matColumnDef="contato">
     <mat-header-cell *matHeaderCellDef> Contato </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{row.contato}} </mat-cell>
@@ -30,10 +30,11 @@
   <ng-container matColumnDef="acoes">
     <mat-header-cell *matHeaderCellDef style="width:180px"> Ações </mat-header-cell>
     <mat-cell *matCellDef="let row" style="width:180px">
-      <button mat-raised-button color="accent" class="me-2">
+      <button mat-raised-button color="accent" class="me-2" [routerLink]="['/clientes/cliente/editar']"
+        [state]="{email:row.email}">
         Editar
       </button>
-      <button mat-raised-button color="warn" class="">
+      <button mat-raised-button color="warn" class="" (click)="deleteCliente()">
         Excluir
       </button>
     </mat-cell>

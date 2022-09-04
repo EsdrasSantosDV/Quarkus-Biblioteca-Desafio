@@ -1,0 +1,72 @@
+<div class="header" style="padding-bottom: 2em;">
+  <div class="row">
+    <div class="col-md-12" style="text-align: center; font-size: 2em;">
+      <span *ngIf="!editar">
+        Adicionar Autor
+      </span>
+      <span *ngIf="editar">
+        Editar Autor
+      </span>
+    </div>
+  </div>
+</div>
+
+<form *ngIf="autorForm" [formGroup]="autorForm" class="form-horizontal m-t-20" id="autorForm"
+  (ngSubmit)="onSubmit(autorForm.value)" novalidate>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card-body">
+        <label for="email">Email</label>
+        <input class="form-control" id="email" formControlName="email" />
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card-body">
+        <label for="nome">Nome</label>
+        <input class="form-control" id="nome" formControlName="nome" />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card-body">
+        <label for="ISNI">ISNI</label>
+        <input class="form-control" type="number" id="ISNI" formControlName="ISNI" />
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card-body">
+        <label for="dataNascimento">Data de Nascimento</label>
+        <input class="form-control" type="date" id="dataNascimento" formControlName="dataNascimento" />
+      </div>
+
+    </div>
+    <div class="col-md-6">
+      <div class="card-body">
+        <label for="biografia">Biografia</label>
+        <textarea class="form-control" rows="4" id="biografia" formControlName="biografia"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 2em;">
+    <div class="col-md-4 text-left">
+      <div class="card-body">
+        <button class="btn btn-danger" [routerLink]="['/autores/listar']">
+          Cancelar
+        </button>
+      </div>
+    </div>
+    <div class="col-md-4 text-right">
+      <div class="card-body">
+        <button class="btn btn-success text-right" type="submit" [disabled]="!autorForm.valid">
+          {{editar ? "Salvar" : "Adicionar"}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</form>

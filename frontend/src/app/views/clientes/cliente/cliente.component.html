@@ -1,0 +1,55 @@
+<div class="header" style="padding-bottom: 2em;">
+  <div class="row">
+    <div class="col-md-12" style="text-align: center; font-size: 2em;">
+      <span *ngIf="!editar">
+        Adicionar Cliente
+      </span>
+      <span *ngIf="editar">
+        Editar Cliente
+      </span>
+    </div>
+  </div>
+</div>
+
+<form *ngIf="clienteForm" [formGroup]="clienteForm" class="form-horizontal m-t-20" id="clienteForm"
+  (ngSubmit)="onSubmit(clienteForm.value)" novalidate>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card-body">
+        <label for="email">Email</label>
+        <input class="form-control" id="email" formControlName="email" />
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card-body">
+        <label for="nome">Nome</label>
+        <input class="form-control" id="nome" formControlName="nome" />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card-body">
+        <label for="contato">Contato</label>
+        <input class="form-control" id="contato" formControlName="contato" mask="(00)000 000 000" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 2em;">
+    <div class="col-md-4 text-left">
+      <div class="card-body">
+        <button class="btn btn-danger" [routerLink]="['/clientes/listar']">
+          Cancelar
+        </button>
+      </div>
+    </div>
+    <div class="col-md-4 text-right">
+      <div class="card-body">
+        <button class="btn btn-success text-right" type="submit" [disabled]="!clienteForm.valid">
+          {{editar ? "Salvar" : "Adicionar"}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</form>
