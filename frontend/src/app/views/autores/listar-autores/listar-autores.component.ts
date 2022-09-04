@@ -8,7 +8,7 @@ import { AutoresService } from '../autores.service';
 })
 export class ListarAutoresComponent implements OnInit {
   autores: Autor[] = [];
-  displayedColumns = ['email', 'nome', 'biografia', 'dataNascimento', 'acoes'];
+  displayedColumns = ['ISNI','email', 'nome', 'biografia', 'dataNascimento', 'acoes'];
 
 
   constructor(private autorApi: AutoresService) { }
@@ -17,14 +17,20 @@ export class ListarAutoresComponent implements OnInit {
     await this.buscarAutores();
   }
 
-  async buscarAutores(){    
+  async buscarAutores(){
     this.autorApi.listarAutores().subscribe((res) => {
       this.autores = res;
     });
   }
 
-  async deleteAutor(){
-    console.log('deletar');
-    this.buscarAutores();
+  async deleteAutor(ISNI:string) {
+    console.log('deletar',ISNI);
+    this.autorApi.deleteAutor(ISNI).subscribe((res) => {
+
+      this.buscarAutores();
+
+    });
+
+
   }
 }

@@ -12,10 +12,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./autor.component.scss'],
 })
 export class AutorComponent implements OnInit {
-  autores: Autor[] = [];
+  autor: Autor|null=null;
 
   editar: boolean = true;
-  email: String | null = null;
+  ISNI: String | null = null;
 
 
   autorForm: FormGroup = Object.create(null);
@@ -34,41 +34,52 @@ export class AutorComponent implements OnInit {
       'biografia': new FormControl(null, [Validators.required, Validators.maxLength(200)]),
     });
     this.editar = (this.route.snapshot.paramMap.get('editar') == 'editar') ? true : false;
-    this.email = this.router.getCurrentNavigation()?.extras.state?.email
+    this.ISNI = this.router.getCurrentNavigation()?.extras.state?.ISNI
   }
 
   ngOnInit(): void {
-    this.autorApi.listarAutores().subscribe((res) => {
-      this.autores = res;
-    });
+
+    console.log(this.ISNI);
+    if (this.ISNI && this.editar) {
+    this.autorApi.buscarAutor(this.ISNI).subscribe((res:Autor|any) => {
+      this.autor = res;
+      if (res) {
+        this.autorForm.patchValue({
+          email: res.email,
+          nome: res.nome,
+          dataNascimento:res.dataNascimento,
+          ISNI:res.ISNI,
+          biografia:res.biografia,
+
+        });
+      }
+        console.log(res);
+
+      });
+    }
   }
 
   async onSubmit(form: Autor) {
-
     if (new Date(form.dataNascimento.toString()) < new Date()) {
+
       if (form.email.includes('.') && form.email.includes('@')) {
         if (this.editar) {
-
           let object: Autor = {
             email: form.email,
             nome: form.nome,
-            ISNI: form.ISNI.toString(),
+            ISNI: form.ISNI,
             dataNascimento: form.dataNascimento.toString(),
             biografia: form.biografia,
           }
-
           this.autorApi.updateAutor(object).subscribe((res) => {
-            if (res) {
-
-              alert('Autor Atualizado com Sucesso!');
-              this.router.navigateByUrl('/autores/listar');
-            }
+            alert('Autor Atualizado com Sucesso!');
+            this.router.navigateByUrl('/autores/listar');
           }, (err) => {
             console.log(err)
-
             alert('Houve um erro ao editar o Autor!');
           });
         }
+
         else {
           let object: Autor = {
             email: form.email,
@@ -79,27 +90,23 @@ export class AutorComponent implements OnInit {
           }
 
           this.autorApi.addAutor(object).subscribe((res) => {
-            if (res) {
-
-              alert('Autor Adicionado com Sucesso!');
-              this.router.navigateByUrl('/autores/listar');
-            }
+            alert('Autor Adicionado com Sucesso!');
+            this.router.navigateByUrl('/autores/listar');
           }, (err) => {
             console.log(err)
-
             alert('Houve um erro ao adicionar o Autor!');
           });
 
         }
       }
       else {
-        // this.toastr.error('Digite um E-mail Válido!', 'E-mail Inválido!');
-        alert('Digite um Ano Válido!');
+
+        alert('Digite uma Data passada!');
       }
     }
     else {
-      // this.toastr.error('Digite uma Data Válida!', 'Data Inválida!');
-      alert('Digite um Ano Válido!');
+
+      alert('Digite uma data Passada!');
     }
   }
 }

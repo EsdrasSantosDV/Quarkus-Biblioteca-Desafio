@@ -27,7 +27,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 		@NamedNativeQuery(name="CONSULTAR_AUTOR_BYISNI",query="SELECT ISNI,nome,email,data_nascimento,biografia FROM tb_autor WHERE ISNI=:ISNI",resultClass = Autor.class),
 		@NamedNativeQuery(name="ISNI_SENDO_USADO",query="SELECT ISNI,nome,email,data_nascimento,biografia FROM tb_autor WHERE ISNI=:ISNI",resultClass = Autor.class)
 })
-public class Autor implements Serializable {
+public class Autor  {
 	
 	
 	@Id
@@ -45,7 +45,7 @@ public class Autor implements Serializable {
 	@Column(name = "email")
 	private String email;
 	
-	@NotBlank(message="O campo data de nasciemento é obrigatório!")
+
 	@Column(name = "data_nascimento",nullable = false,updatable = false)
 	private LocalDate dataNascimento;
 	

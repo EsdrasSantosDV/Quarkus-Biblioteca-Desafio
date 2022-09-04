@@ -104,7 +104,5 @@ public class AutorDao {
         query.executeUpdate();
     }
 
-
-
 }
 

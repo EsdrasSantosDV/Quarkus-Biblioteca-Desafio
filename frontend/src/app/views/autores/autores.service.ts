@@ -14,13 +14,12 @@ export class AutoresService {
   listarAutores(): Observable<Autor[]> {
     return this.http
       .get<Autor[]>(ApiUrl.listarAutores)
-      .pipe(map((res) => res.map((c, i) => ({ ...c, posicao: i }))));
   }
 
-  buscarAutor(email: String): Observable<Autor[]> {
+  buscarAutor(ISNI: String): Observable<Autor[]> {
     return this.http
-      .get<Autor[]>(ApiUrl.listarAutores + '/' + email)
-      .pipe(map((res) => res.map((c, i) => ({ ...c, posicao: i }))));
+      .get<Autor[]>(ApiUrl.listarAutores + '/' + ISNI)
+
   }
 
   addAutor(newAutor: Autor): Observable<Autor[]> {
@@ -30,11 +29,11 @@ export class AutoresService {
 
   updateAutor(updateAutor: Autor): Observable<Autor[]> {
     return this.http
-      .put<Autor[]>(ApiUrl.listarAutores, updateAutor);
+      .put<Autor[]>(ApiUrl.listarAutores+'/'+updateAutor.ISNI, updateAutor);
   }
 
-  deleteAutor(deleteAutor: Autor): Observable<Autor[]> {
+  deleteAutor(deleteAutor: string) {
     return this.http
-      .delete<Autor[]>(ApiUrl.listarAutores + '/' + deleteAutor);
+      .delete(ApiUrl.listarAutores + '/' + deleteAutor);
   }
 }

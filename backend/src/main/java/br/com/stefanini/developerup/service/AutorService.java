@@ -29,13 +29,9 @@ public class AutorService {
 	
 	@Inject
 	AutorDao dao;
-
 	public List<AutorDto> listar(){
 		return dao.listar().stream().map(AutorParser.get()::dto).collect(Collectors.toList());
 	}
-
-
-
 	public void validar(@Valid AutorDto dto) throws  Exception
 	{
 		//ISNI,nome,email,dataNascimento,biografia
@@ -51,9 +47,10 @@ public class AutorService {
 			throw new PropertyException("Email Invalido",dto.getEmail());
 		}
 
-		//LEMBRAR DE VALIDAR A DATA
-		Date datadehj=new Date();
-
+		if(dto.getDataNascimento()==null)
+		{
+			throw  new PropertyException("Data Invalida",dto.getNome());
+		}
 
 		if(dto.getNome()==null||dto.getNome().length()>50)
 		{
@@ -66,11 +63,6 @@ public class AutorService {
 		}
 
 	}
-
-
-
-
-
 
 	@Transactional(rollbackOn = Exception.class)
 	public void cadastrar(@Valid AutorDto autordto) throws Exception {
@@ -90,9 +82,6 @@ public class AutorService {
 
 	}
 
-
-
-
 	private void validaISNIDuplicado(String ISNI) throws PropertyException {
 		if(dao.ISNISendoUsado(ISNI)) {
 			throw new PropertyException("ISNI already exists",ISNI);
@@ -103,8 +92,6 @@ public class AutorService {
 		return AutorParser.get().dto(buscarPorISNI(ISNI));
 	}
 
-
-
 	@Transactional(rollbackOn = Exception.class)
 	public void atualizar(String ISNI, AutorDto dto) {
 		Autor autor= AutorParser.get().entidade(dto);
@@ -112,12 +99,11 @@ public class AutorService {
 		autorBanco.setEmail(autor.getEmail());
 		autorBanco.setNome(autor.getNome());
 		autorBanco.setBiografia(autor.getBiografia());
+		autorBanco.setDataNascimento(autor.getDataNascimento());
 
 
 		dao.atualizar(autorBanco);
 	}
-
-
 
 	public void excluir(String ISNI)
 	{

@@ -2,6 +2,6 @@ export default interface Autor {
     email: string,
     nome: string,
     ISNI: string,
-    dataNascimento: String,
+    dataNascimento: string,
     biografia: string,
 }

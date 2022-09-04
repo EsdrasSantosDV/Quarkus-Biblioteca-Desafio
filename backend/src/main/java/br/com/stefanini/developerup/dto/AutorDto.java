@@ -1,8 +1,6 @@
 package br.com.stefanini.developerup.dto;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 public class AutorDto {
 
@@ -21,7 +19,7 @@ public class AutorDto {
 	}
 
 	public void setISNI(String ISNI) {
-		ISNI = ISNI;
+		this.ISNI = ISNI;
 	}
 
 	public String getNome() {

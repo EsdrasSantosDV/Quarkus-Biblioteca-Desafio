@@ -28,10 +28,8 @@ import java.util.stream.Collectors;
 public class AutorRest {
 	@Inject
     AutorService service;
-
     @Inject
     Validator validator;
-
     @GET
     @Operation(summary = "Listar", description = "Retorna uma lista de Autores")
     @APIResponse(responseCode = "200", description = "AutorDto",

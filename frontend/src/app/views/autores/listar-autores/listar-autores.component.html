@@ -9,6 +9,10 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 
+  <ng-container matColumnDef="ISNI">
+    <mat-header-cell *matHeaderCellDef>ISNI </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.ISNI}} </mat-cell>
+  </ng-container>
 
   <ng-container matColumnDef="email">
     <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
@@ -27,7 +31,7 @@
     <mat-cell *matCellDef="let row"> {{row.biografia}} </mat-cell>
   </ng-container>
 
- 
+
   <ng-container matColumnDef="dataNascimento">
     <mat-header-cell *matHeaderCellDef> Data de Nascimento </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{row.dataNascimento}} </mat-cell>
@@ -36,10 +40,10 @@
   <ng-container matColumnDef="acoes">
     <mat-header-cell *matHeaderCellDef style="width:180px"> Ações </mat-header-cell>
     <mat-cell *matCellDef="let row" style="width:180px">
-      <button mat-raised-button color="accent" class="me-2" [routerLink]="['/autores/autor/editar']">
+      <button mat-raised-button color="accent" class="me-2" [routerLink]="['/autores/autor/editar/']"   [state]="{ISNI:row.ISNI}">
         Editar
       </button>
-      <button mat-raised-button color="warn" class="" (click)="deleteAutor()">
+      <button mat-raised-button color="warn" class="" (click)="deleteAutor(row.ISNI)">
         Excluir
       </button>
     </mat-cell>
